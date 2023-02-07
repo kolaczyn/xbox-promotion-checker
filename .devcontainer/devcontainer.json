@@ -1,0 +1,11 @@
+// See https://containers.dev/implementors/json_reference/ for configuration reference
+{
+	"name": "TypeScript template",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+"remoteUser": "root",
+"features": {
+	"ghcr.io/devcontainers-contrib/features/pnpm:2": {}
+}
+}
