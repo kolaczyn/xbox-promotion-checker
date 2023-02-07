@@ -15,9 +15,6 @@
     "test": "jest --watch",
     "test:run": "jest",
     "ci": "run-p -l --aggregate-output format lint:check types test:run",
-    "build": "rimraf dist && tsc",
-    "build:package": "rimraf lib && yarn build:esm",
-    "build:esm": "tsc --module esnext --outDir lib/esm",
     "prepare": "husky install"
   },
   "devDependencies": {
