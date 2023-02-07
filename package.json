@@ -15,6 +15,7 @@
     "test": "jest --watch",
     "test:run": "jest",
     "ci": "run-p -l --aggregate-output format lint:check types test:run",
+    "build": "tsc",
     "prepare": "husky install"
   },
   "devDependencies": {
