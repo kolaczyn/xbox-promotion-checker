@@ -57,5 +57,8 @@
       "prettier --write",
       "eslint"
     ]
+  },
+  "dependencies": {
+    "@tsconfig/node18": "^1.0.1"
   }
 }
