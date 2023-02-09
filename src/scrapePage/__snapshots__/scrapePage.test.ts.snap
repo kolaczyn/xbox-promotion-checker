@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`scrapePage should retrieve correct game information 1`] = `
+[
+  {
+    "curr": "29,49 zł",
+    "prev": "117,99 zł",
+    "title": "Rayman Legends",
+  },
+  {
+    "curr": "208,24 zł",
+    "prev": "594,99 zł",
+    "title": "Assassin's Creed Valhalla Complete Edition",
+  },
+  {
+    "curr": "124,49 zł",
+    "prev": "414,99 zł",
+    "title": "Far Cry® 6 Gold Edition",
+  },
+]
+`;

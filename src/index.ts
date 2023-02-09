@@ -1,17 +1,15 @@
 import axios from 'axios'
-import { scrapePage } from './scrapeData'
+import { scrapePage } from './scrapePage/scrapePage'
 import { GameInfo } from './types'
 
 const formatInfo = (info: GameInfo) =>
   `${info.title}: z ${info.prev} na ${info.curr}`
 
-const itemsPerPage = 90
-const fetchPage = async (page = 0) =>
-  Promise.resolve(
-    `https://www.microsoft.com/pl-pl/store/deals/games/xbox?skipItems=${
-      page * itemsPerPage
-    }`
-  )
+const XBOX_URL = 'https://www.microsoft.com/pl-pl/store/deals/games/xbox'
+const ITEMS_PER_AGE = 90
+
+const fetchPage = (page = 0) =>
+  Promise.resolve(`${XBOX_URL}?skipItems=${page * ITEMS_PER_AGE}`)
     .then(url => axios.get<string>(url))
     .then(resp => resp.data)
 
