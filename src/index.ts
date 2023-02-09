@@ -1,35 +1,21 @@
 import axios from 'axios'
-import { parse } from 'node-html-parser'
+import { scrapePage } from './scrapeData'
+import { GameInfo } from './types'
 
-const fetchHtml = async (skipItems = 0) => {
-  const url = `https://www.microsoft.com/pl-pl/store/deals/games/xbox?skipItems=${skipItems}`
-  const response = await axios.get(url)
-  return response.data as string
-}
+const formatInfo = (info: GameInfo) =>
+  `${info.title}: z ${info.prev} na ${info.curr}`
 
-const getPage = async (page = 0) => {
-  const ITEMS_PER_PAGE = 90
-  const htmlAsStr = await fetchHtml(ITEMS_PER_PAGE * page)
-  const html = parse(htmlAsStr)
+const itemsPerPage = 90
+const fetchPage = async (page = 0) =>
+  Promise.resolve(
+    `https://www.microsoft.com/pl-pl/store/deals/games/xbox?skipItems=${
+      page * itemsPerPage
+    }`
+  )
+    .then(url => axios.get<string>(url))
+    .then(resp => resp.data)
 
-  const cards = html.querySelectorAll('[data-bi-ct="Product Card"]')
-  return cards.map(card => {
-    const title = card.getAttribute('data-bi-cn')
-    const [prev, curr] = card.querySelector('[aria-hidden="true"]')?.querySelectorAll('span') ?? [null, null]
-    return {
-      title,
-      prev: prev?.innerText,
-      curr: curr?.innerText.replace('+', ''),
-    }
-  })
-}
-
-const fetchAllPages = async () => {
-  const pages = await Promise.all([getPage(0), getPage(1), getPage(2), getPage(3)])
-
-  const allStuff = pages.flatMap(x => x).map(x => `${x.title}: z ${x.prev} na ${x.curr}`)
-
-  console.log(allStuff)
-}
-
-fetchAllPages()
+Promise.all([0, 1, 2, 3].map(fetchPage))
+  .then(x => x.flatMap(scrapePage))
+  .then(x => x.map(formatInfo))
+  .then(console.log)
