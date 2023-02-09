@@ -1,3 +1,4 @@
+import fs from 'fs/promises'
 import axios from 'axios'
 import { scrapePage } from './scrapePage/scrapePage'
 import { GameInfo } from './types'
@@ -13,7 +14,22 @@ const fetchPage = (page = 0) =>
     .then(url => axios.get<string>(url))
     .then(resp => resp.data)
 
-Promise.all([0, 1, 2, 3].map(fetchPage))
-  .then(x => x.flatMap(scrapePage))
-  .then(x => x.map(formatInfo))
-  .then(console.log)
+const readWatchList = () =>
+  fs.readFile('./watchlist.txt').then(x => x.toString().split('\n'))
+
+const getAllGames = () =>
+  Promise.all([0, 1, 2, 3].map(fetchPage)).then(x => x.flatMap(scrapePage))
+
+const filterWatchList = async () => {
+  const [watchList, allGames] = await Promise.all([
+    readWatchList(),
+    getAllGames(),
+  ])
+
+  allGames
+    .filter(game => watchList.includes(game.title))
+    .map(formatInfo)
+    .forEach(x => console.log(x))
+}
+
+filterWatchList()
