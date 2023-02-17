@@ -21,4 +21,4 @@ jobs:
         with:
           version: 7.26.2
       - run: pnpm install
-      - run: pnpm dev
+      - run: pnpm dev:run
