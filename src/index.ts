@@ -1,3 +1,7 @@
+import dotenv from 'dotenv'
+dotenv.config()
+import { WebhookClient } from 'discord.js'
+
 import { fetchPage } from './fetchPage'
 import { readWatchList } from './readWatchList'
 import { scrapePage } from './scrapePage/scrapePage'
@@ -19,10 +23,27 @@ const filterWatchList = async () => {
     .filter(game => watchList.includes(game.title))
     .map(formatInfo)
 
-  if (messages.length) {
-    return messages.forEach(x => console.log(x))
-  }
-  return console.log('No games found')
+  return messages.length ? messages.join('\n') : 'No games found'
 }
 
-filterWatchList()
+/** @throws {Error} if env vars are not defined */
+const sendDiscordMessage = async (message: string) => {
+  const { ID: id, TOKEN: token } = process.env
+  if (id === undefined || token === undefined)
+    // I hate throwing errors, but this is one of a few good use cases for it :p
+    throw new Error(`id and/or token not defined. Can't send a message`)
+
+  const webhookClient = new WebhookClient({ id, token })
+  console.log('sending message:', message)
+  await webhookClient.send({
+    content: message,
+  })
+  console.log('message sent')
+}
+
+const main = async () => {
+  const message = await filterWatchList()
+  sendDiscordMessage(message)
+}
+
+main()
