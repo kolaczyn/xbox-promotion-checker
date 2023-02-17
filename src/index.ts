@@ -32,16 +32,6 @@ const sendDiscordMessage = async (message: string) => {
     // I hate throwing errors, but this is one of a few good use cases for it :p
     throw new Error(`id and/or token not defined. Can't send a message`)
 
-  console.log({
-    id: {
-      first: id.at(0),
-      last: id.at(-1),
-    },
-    token: {
-      first: token.at(0),
-      last: token.at(-1),
-    },
-  })
   const webhookClient = new WebhookClient({ id, token })
   console.log('sending message:\n', message)
   await webhookClient.send({
