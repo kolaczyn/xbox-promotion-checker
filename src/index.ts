@@ -9,6 +9,7 @@ import { GameInfo } from './types'
 
 const getAllGames = () =>
   Promise.all([0, 1, 2, 3].map(fetchPage)).then(x => x.flatMap(scrapePage))
+
 const fetchWatchlistGamesOnPromotion = async () => {
   const [watchList, allGames] = await Promise.all([
     readWatchList(),
@@ -20,6 +21,7 @@ const fetchWatchlistGamesOnPromotion = async () => {
 
 const formatInfo = (info: GameInfo) =>
   `${info.title}: z ${info.prev} na ${info.curr}`
+
 const formatDiscordMessage = (games: GameInfo[]) =>
   games.length > 0 ? games.map(formatInfo).join('\n') : 'No games found'
 
