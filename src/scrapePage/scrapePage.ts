@@ -6,12 +6,16 @@ const scrapeCard = (card: HTMLElement): GameInfo => {
   const [prevEl, currEl] = card
     .querySelector('[aria-hidden="true"]')
     ?.querySelectorAll('span') ?? [null, null]
+  const url = card.querySelector('a')?.getAttribute('href') ?? null
+  const imageUrl = card.querySelector('img')?.getAttribute('src') ?? null
 
   const dunno = '<dunno>'
   return {
     title: title ?? dunno,
     prev: prevEl?.innerText ?? dunno,
     curr: currEl?.innerText.replace('+', '') ?? dunno,
+    url,
+    imageUrl,
   }
 }
 
