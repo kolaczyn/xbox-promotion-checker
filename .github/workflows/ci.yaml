@@ -22,17 +22,3 @@ jobs:
           version: 7.26.2
       - run: pnpm install
       - run: pnpm ci
-
-  build:
-    runs-on: ubuntu-latest
-    name: Build
-    steps:
-      - uses: actions/checkout@v2
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 7.26.2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 18
-      - run: pnpm install
-      - run: pnpm build
