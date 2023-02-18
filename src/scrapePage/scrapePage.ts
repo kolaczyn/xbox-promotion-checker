@@ -15,5 +15,13 @@ const scrapeCard = (card: HTMLElement): GameInfo => {
   }
 }
 
-export const scrapePage = (page: string) =>
-  parse(page).querySelectorAll('[data-bi-ct="Product Card"]').map(scrapeCard)
+export const scrapePage = (html: string): GameInfo[] =>
+  parse(html).querySelectorAll('[data-bi-ct="Product Card"]').map(scrapeCard)
+
+export const scrapeNumberOfPages = (html: string): number | null => {
+  const paginationElements = parse(html).querySelectorAll('.page-item')
+  return paginationElements.length > 0
+    ? // `-2`, because of the 'next' and 'previous' links on the page
+      paginationElements.length - 2
+    : null
+}

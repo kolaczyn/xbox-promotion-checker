@@ -4,10 +4,18 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch",
+      "name": "Debug",
       "skipFiles": ["<node_internals>/**"],
-      "runtimeExecutable": "yarn",
-      "args": ["start"]
+      "runtimeExecutable": "pnpm",
+      "args": ["dev:run"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Tests",
+      "skipFiles": ["<node_internals>/**"],
+      "runtimeExecutable": "pnpm",
+      "args": ["test:run"]
     }
   ]
 }
