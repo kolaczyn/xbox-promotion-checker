@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { scrapePage } from './scrapePage/scrapePage'
 
 const XBOX_URL = 'https://www.microsoft.com/pl-pl/store/deals/games/xbox'
 const ITEMS_PER_AGE = 90
@@ -8,4 +9,7 @@ const fetchPage = (page = 0) =>
     .then(url => axios.get<string>(url))
     .then(resp => resp.data)
 
-export const fetchAllPages = () => Promise.all([0, 1, 2, 3].map(fetchPage))
+const fetchAllPages = () => Promise.all([0, 1, 2, 3].map(fetchPage))
+
+export const getAllGames = () =>
+  fetchAllPages().then(x => x.flatMap(scrapePage))
