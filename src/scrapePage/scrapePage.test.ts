@@ -1,9 +1,23 @@
 import fs from 'fs/promises'
-import { scrapePage } from './scrapePage'
+import { scrapeNumberOfPages, scrapePage } from './scrapePage'
+
+const readHtml = async (htmlName: string) =>
+  fs.readFile(`./src/scrapePage/${htmlName}`).then(x => x.toString())
 
 describe('scrapePage', () => {
   it('should retrieve correct game information', async () => {
-    const exampleHtml = await fs.readFile('./src/scrapePage/examplePage.html')
-    expect(scrapePage(exampleHtml.toString())).toMatchSnapshot()
+    const html = await readHtml('cards-example.html')
+    expect(scrapePage(html)).toMatchSnapshot()
+  })
+})
+
+describe('scrapeNumberOfPages', () => {
+  it('should get number of pages', async () => {
+    const html = await readHtml('pagination-example.html')
+    expect(scrapeNumberOfPages(html)).toEqual(6)
+  })
+  it('should return null if no element on the page', () => {
+    const html = '<h1>hi mom</h1>'
+    expect(scrapeNumberOfPages(html)).toBeNull()
   })
 })
