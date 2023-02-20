@@ -3,7 +3,7 @@ name: Run Bot
 on:
   workflow_dispatch:
   schedule:
-    - cron: '00 11 * * 6,1,3,5'
+    - cron: '00 11 * * *'
 env:
   TOKEN: '${{ secrets.TOKEN }}'
   ID: '${{ secrets.ID }}'

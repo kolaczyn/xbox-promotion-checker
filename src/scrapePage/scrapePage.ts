@@ -1,6 +1,6 @@
 import parse, { HTMLElement } from 'node-html-parser'
-import { priceToNumber } from '../priceToNumber'
 import { GameInfo } from '../types'
+import { priceToNumber } from '../utils/priceToNumber'
 
 const scrapeCard = (card: HTMLElement): GameInfo | null => {
   const title = card.getAttribute('data-bi-cn')
@@ -12,7 +12,6 @@ const scrapeCard = (card: HTMLElement): GameInfo | null => {
 
   const prevPriceStr = prevEl?.innerText
   const currPriceStr = currEl?.innerText.replace('+', '')
-
   const prevPrice = priceToNumber(prevPriceStr ?? '')
   const currPrice = priceToNumber(currPriceStr ?? '')
 
