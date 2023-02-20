@@ -6,8 +6,8 @@ const scrapeCard = (card: HTMLElement): GameInfo | null => {
   const [prevEl, currEl] = card
     .querySelector('[aria-hidden="true"]')
     ?.querySelectorAll('span') ?? [null, null]
-  const url = card.querySelector('a')?.getAttribute('href') ?? null
-  const imageUrl = card.querySelector('img')?.getAttribute('src') ?? null
+  const url = card.querySelector('a')?.getAttribute('href')
+  const imageUrl = card.querySelector('img')?.getAttribute('src')
 
   const prev = prevEl?.innerText
   const curr = currEl?.innerText.replace('+', '')
