@@ -1,4 +1,5 @@
 import parse, { HTMLElement } from 'node-html-parser'
+import { priceToNumber } from '../priceToNumber'
 import { GameInfo } from '../types'
 
 const scrapeCard = (card: HTMLElement): GameInfo | null => {
@@ -9,8 +10,11 @@ const scrapeCard = (card: HTMLElement): GameInfo | null => {
   const url = card.querySelector('a')?.getAttribute('href')
   const imageUrl = card.querySelector('img')?.getAttribute('src')
 
-  const prevPrice = prevEl?.innerText
-  const currPrice = currEl?.innerText.replace('+', '')
+  const prevPriceStr = prevEl?.innerText
+  const currPriceStr = currEl?.innerText.replace('+', '')
+
+  const prevPrice = priceToNumber(prevPriceStr ?? '')
+  const currPrice = priceToNumber(currPriceStr ?? '')
 
   if (!title || !prevPrice || !currPrice || !url || !imageUrl) {
     return null
