@@ -1,5 +1,5 @@
 import { WebhookClient } from 'discord.js'
-import { createDiscordMessage } from './createDiscordMessage'
+import { createMessage } from './createMessage/createMessage'
 import { GameInfoWithColor } from './types'
 
 /** @throws {Error} if env vars are not defined */
@@ -10,7 +10,7 @@ export const sendDiscordMessage = async (games: GameInfoWithColor[]) => {
     throw new Error(`id and/or token not defined. Can't send a message`)
 
   const webhookClient = new WebhookClient({ id, token })
-  const embeds = games.map(game => createDiscordMessage(game))
+  const embeds = games.map(game => createMessage(game))
 
   await webhookClient.send({
     content: 'Promocje wjechały',

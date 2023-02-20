@@ -1,6 +1,6 @@
 import { EmbedBuilder } from 'discord.js'
-import { GameInfoWithColor } from './types'
-import { calcPriceReduction } from './utils/calcPriceReduction'
+import { GameInfoWithColor } from '../types'
+import { calcPriceReduction } from '../utils/calcPriceReduction'
 
 const promotionReaction = (promotion: number) => {
   if (promotion > 80) return 'Meh promocja'
@@ -16,7 +16,7 @@ const formatPrice = (price: number) =>
     price
   )
 
-export const createDiscordMessage = (game: GameInfoWithColor) => {
+export const createMessage = (game: GameInfoWithColor) => {
   const reduction = calcPriceReduction(game.prevPrice, game.currPrice)
   return new EmbedBuilder()
     .setTitle(game.title)
