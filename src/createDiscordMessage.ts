@@ -4,6 +4,6 @@ import { GameInfoWithColor } from './types'
 export const createDiscordMessage = (game: GameInfoWithColor) =>
   new EmbedBuilder()
     .setTitle(game.title)
-    .setDescription(`Było ${game.prev}, jest ${game.curr}`)
+    .setDescription(`Było ${game.prevPrice}, jest ${game.currPrice}`)
     .setURL(game.url)
     .setColor(game.color)

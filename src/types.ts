@@ -2,8 +2,8 @@ import { ColorResolvable } from 'discord.js'
 
 export type GameInfo = {
   title: string
-  prev: string
-  curr: string
+  prevPrice: string
+  currPrice: string
   url: string
   imageUrl: string
 }

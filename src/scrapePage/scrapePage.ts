@@ -9,17 +9,17 @@ const scrapeCard = (card: HTMLElement): GameInfo | null => {
   const url = card.querySelector('a')?.getAttribute('href')
   const imageUrl = card.querySelector('img')?.getAttribute('src')
 
-  const prev = prevEl?.innerText
-  const curr = currEl?.innerText.replace('+', '')
+  const prevPrice = prevEl?.innerText
+  const currPrice = currEl?.innerText.replace('+', '')
 
-  if (!title || !prev || !curr || !url || !imageUrl) {
+  if (!title || !prevPrice || !currPrice || !url || !imageUrl) {
     return null
   }
 
   return {
     title,
-    prev,
-    curr,
+    prevPrice,
+    currPrice,
     url,
     imageUrl,
   }
