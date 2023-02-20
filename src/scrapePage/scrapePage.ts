@@ -1,7 +1,7 @@
 import parse, { HTMLElement } from 'node-html-parser'
 import { GameInfo } from '../types'
 
-const scrapeCard = (card: HTMLElement): GameInfo => {
+const scrapeCard = (card: HTMLElement): GameInfo | null => {
   const title = card.getAttribute('data-bi-cn')
   const [prevEl, currEl] = card
     .querySelector('[aria-hidden="true"]')
@@ -9,18 +9,27 @@ const scrapeCard = (card: HTMLElement): GameInfo => {
   const url = card.querySelector('a')?.getAttribute('href') ?? null
   const imageUrl = card.querySelector('img')?.getAttribute('src') ?? null
 
-  const dunno = '<dunno>'
+  const prev = prevEl?.innerText
+  const curr = currEl?.innerText.replace('+', '')
+
+  if (!title || !prev || !curr || !url || !imageUrl) {
+    return null
+  }
+
   return {
-    title: title ?? dunno,
-    prev: prevEl?.innerText ?? dunno,
-    curr: currEl?.innerText.replace('+', '') ?? dunno,
+    title,
+    prev,
+    curr,
     url,
     imageUrl,
   }
 }
 
 export const scrapePage = (html: string): GameInfo[] =>
-  parse(html).querySelectorAll('[data-bi-ct="Product Card"]').map(scrapeCard)
+  parse(html)
+    .querySelectorAll('[data-bi-ct="Product Card"]')
+    .map(scrapeCard)
+    .filter((x): x is GameInfo => x !== null)
 
 export const scrapeNumberOfPages = (html: string): number | null => {
   const paginationElements = parse(html).querySelectorAll('.page-item')

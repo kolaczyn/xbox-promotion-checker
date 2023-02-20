@@ -132,3 +132,4 @@ dist
 # project specific stuff
 lib
 .pnpm-store
+.DS_STORE
