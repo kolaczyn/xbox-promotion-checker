@@ -1,22 +1,38 @@
 import parse, { HTMLElement } from 'node-html-parser'
 import { GameInfo } from '../types'
+import { priceToNumber } from '../utils/priceToNumber'
 
-const scrapeCard = (card: HTMLElement): GameInfo => {
+const scrapeCard = (card: HTMLElement): GameInfo | null => {
   const title = card.getAttribute('data-bi-cn')
   const [prevEl, currEl] = card
     .querySelector('[aria-hidden="true"]')
     ?.querySelectorAll('span') ?? [null, null]
+  const url = card.querySelector('a')?.getAttribute('href')
+  const imageUrl = card.querySelector('img')?.getAttribute('src')
 
-  const dunno = '<dunno>'
+  const prevPriceStr = prevEl?.innerText
+  const currPriceStr = currEl?.innerText.replace('+', '')
+  const prevPrice = priceToNumber(prevPriceStr ?? '')
+  const currPrice = priceToNumber(currPriceStr ?? '')
+
+  if (!title || !prevPrice || !currPrice || !url || !imageUrl) {
+    return null
+  }
+
   return {
-    title: title ?? dunno,
-    prev: prevEl?.innerText ?? dunno,
-    curr: currEl?.innerText.replace('+', '') ?? dunno,
+    title,
+    prevPrice,
+    currPrice,
+    url,
+    imageUrl,
   }
 }
 
 export const scrapePage = (html: string): GameInfo[] =>
-  parse(html).querySelectorAll('[data-bi-ct="Product Card"]').map(scrapeCard)
+  parse(html)
+    .querySelectorAll('[data-bi-ct="Product Card"]')
+    .map(scrapeCard)
+    .filter((x): x is GameInfo => x !== null)
 
 export const scrapeNumberOfPages = (html: string): number | null => {
   const paginationElements = parse(html).querySelectorAll('.page-item')

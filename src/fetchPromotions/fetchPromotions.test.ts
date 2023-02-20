@@ -9,7 +9,7 @@ jest.mock('../fetchPage.ts', () => ({
     Promise.resolve<GameInfo[]>([
       { title: 'Elden Ring', curr: '200 zł', prev: '100 zł' },
       { title: 'GTA V', curr: '150 zł', prev: '200 zł' },
-    ]),
+    ] as GameInfo[]),
 }))
 
 describe('fetchPromotions', () => {
