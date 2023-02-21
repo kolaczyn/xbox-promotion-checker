@@ -11,3 +11,10 @@ export type GameInfo = {
 export type GameInfoWithColor = GameInfo & {
   color: ColorResolvable
 }
+
+export type WishInput = string | WishItem
+
+export type WishItem = {
+  title: string
+  threshold: number | null
+}
