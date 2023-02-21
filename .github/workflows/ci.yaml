@@ -22,3 +22,4 @@ jobs:
           version: 7.26.2
       - run: pnpm install
       - run: pnpm ci
+      - run: pnpm start --dry-run

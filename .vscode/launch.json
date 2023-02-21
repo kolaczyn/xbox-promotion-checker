@@ -7,7 +7,7 @@
       "name": "Debug",
       "skipFiles": ["<node_internals>/**"],
       "runtimeExecutable": "pnpm",
-      "args": ["dev:run"]
+      "args": ["start"]
     },
     {
       "type": "node",
