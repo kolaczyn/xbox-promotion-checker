@@ -6,6 +6,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "ts-node src/index.ts",
+    "start:dry": "ts-node src/index.ts --dry-run",
     "format": "prettier -c src",
     "types": "tsc --noEmit",
     "lint": "eslint src",
