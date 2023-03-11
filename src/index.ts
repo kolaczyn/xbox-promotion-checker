@@ -6,6 +6,7 @@ import { sendDiscordMessage } from './discord'
 import { fetchPromotions } from './fetchPromotions/fetchPromotions'
 import { getGamesColor } from './getGamesColors'
 import { sendConsoleMessage } from './sendConsoleMessage'
+import { app } from './app/app'
 
 program
   .name('Xbox Promotion Checker')
@@ -22,14 +23,14 @@ program.parse()
 
 const main = async () => {
   const options = program.opts()
-  const dryRun = !!options.dryRun
-  const sendMessage = dryRun ? sendConsoleMessage : sendDiscordMessage
+  const isDryRun = !!options.dryRun
+  const sendMessage = isDryRun ? sendConsoleMessage : sendDiscordMessage
 
-  fetchPromotions()
-    .then(getGamesColor)
-    .then(games => {
-      sendMessage(games)
-    })
+  await app({
+    sendMessage,
+    gamesStrategy: getGamesColor,
+    getGames: fetchPromotions,
+  })
 }
 
 main()
