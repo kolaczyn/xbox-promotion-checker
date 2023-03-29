@@ -11,7 +11,5 @@ export const wishlist: WishInput[] = [
   },
   'Dziedzictwo Hogwartu',
   'Crusader Kings III',
-  'Super Meat Boy',
-  'Super Meat Boy Forever',
   'Cuphead',
 ]
