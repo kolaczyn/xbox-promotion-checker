@@ -1,5 +1,7 @@
 # Xbox Promotion Checker
 
+(Inspired by https://github.com/dominikus1993/xbox-promotion-checker-bot)
+
 ## TL;DR
 
 ![meme](https://i.redd.it/o6xypg00uac91.png)
