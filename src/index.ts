@@ -2,10 +2,10 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 import { program } from 'commander'
-import { sendDiscordMessage } from './discord'
+import { sendDiscordMessage } from './sendMessage/sendDiscordMessage'
 import { fetchPromotions } from './fetchPromotions/fetchPromotions'
 import { getGamesColor } from './getGamesColors'
-import { sendConsoleMessage } from './sendConsoleMessage'
+import { sendConsoleMessage } from './sendMessage/sendConsoleMessage'
 import { app } from './app/app'
 
 program

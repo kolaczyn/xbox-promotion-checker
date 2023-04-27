@@ -1,9 +1,12 @@
 import { WebhookClient } from 'discord.js'
-import { createMessage } from './createMessage/createMessage'
-import { GameInfoWithColor } from './types'
+import { createMessage } from '../createMessage/createMessage'
+import { GameInfoWithColor } from '../types'
+import { SendMessage } from './types'
 
 /** @throws {Error} if env vars are not defined */
-export const sendDiscordMessage = async (games: GameInfoWithColor[]) => {
+export const sendDiscordMessage: SendMessage = async (
+  games: GameInfoWithColor[]
+) => {
   const { ID: id, TOKEN: token } = process.env
   if (id === undefined || token === undefined)
     // I hate throwing errors, but this is one of a few good use cases for it :p
