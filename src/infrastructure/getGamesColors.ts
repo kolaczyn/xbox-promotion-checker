@@ -1,6 +1,6 @@
 import { ColorResolvable, HexColorString } from 'discord.js'
 import { getAverageColor } from 'fast-average-color-node'
-import { GameInfo } from './types'
+import { GameInfo } from '../types'
 
 const isHex = (color: string): color is HexColorString => color.startsWith('#')
 

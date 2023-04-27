@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { scrapeNumberOfPages, scrapePage } from './scrapePage/scrapePage'
-import { range } from './utils/range'
+import { range } from '../utils/range'
 
 const XBOX_URL = 'https://www.microsoft.com/pl-pl/store/deals/games/xbox'
 const ITEMS_PER_AGE = 90

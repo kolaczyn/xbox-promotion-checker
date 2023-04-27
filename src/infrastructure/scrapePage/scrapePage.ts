@@ -1,6 +1,6 @@
 import parse, { HTMLElement } from 'node-html-parser'
-import { GameInfo } from '../types'
-import { priceToNumber } from '../utils/priceToNumber'
+import { GameInfo } from '../../types'
+import { priceToNumber } from '../../utils/priceToNumber'
 
 const scrapeCard = (card: HTMLElement): GameInfo | null => {
   const title = card.getAttribute('data-bi-cn')

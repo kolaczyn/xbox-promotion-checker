@@ -1,6 +1,6 @@
 import { WebhookClient } from 'discord.js'
-import { createMessage } from '../createMessage/createMessage'
-import { GameInfoWithColor } from '../types'
+import { createMessage } from '../../domain/createMessage/createMessage'
+import { GameInfoWithColor } from '../../types'
 import { SendMessage } from './types'
 
 /** @throws {Error} if env vars are not defined */

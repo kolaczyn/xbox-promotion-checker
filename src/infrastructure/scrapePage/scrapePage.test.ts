@@ -2,7 +2,9 @@ import fs from 'fs/promises'
 import { scrapeNumberOfPages, scrapePage } from './scrapePage'
 
 const readHtml = async (htmlName: string) =>
-  fs.readFile(`./src/scrapePage/${htmlName}`).then(x => x.toString())
+  fs
+    .readFile(`./src/infrastructure/scrapePage/${htmlName}`)
+    .then(x => x.toString())
 
 describe('scrapePage', () => {
   it('should retrieve correct game information', async () => {

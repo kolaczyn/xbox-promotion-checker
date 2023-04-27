@@ -1,4 +1,4 @@
-import { GameInfo } from './types'
+import { GameInfo } from '../types'
 
 const formatInfo = (info: GameInfo) =>
   `${info.title}: z ${info.prevPrice} na ${info.currPrice}`

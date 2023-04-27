@@ -1,5 +1,5 @@
 import { EmbedBuilder } from 'discord.js'
-import { GameInfoWithColor } from '../types'
+import { GameInfoWithColor } from '../../types'
 import { getDescription } from './getDescription'
 
 export const createMessage = (game: GameInfoWithColor) => {

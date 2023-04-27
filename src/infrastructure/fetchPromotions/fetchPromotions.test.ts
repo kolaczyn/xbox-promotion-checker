@@ -1,4 +1,4 @@
-import { GameInfo } from '../types'
+import { GameInfo } from '../../types'
 import { fetchPromotions } from './fetchPromotions'
 
 jest.mock('../readWatchList.ts', () => ({

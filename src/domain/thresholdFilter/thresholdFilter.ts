@@ -1,4 +1,4 @@
-import { GameInfo, WishItem } from '../types'
+import { GameInfo, WishItem } from '../../types'
 
 const isPriceOk = (price: number, threshold: number | null) => {
   if (threshold === null) return true

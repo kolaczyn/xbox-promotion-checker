@@ -1,5 +1,5 @@
-import { createMessage } from '../createMessage/createMessage'
-import { GameInfoWithColor } from '../types'
+import { createMessage } from '../../domain/createMessage/createMessage'
+import { GameInfoWithColor } from '../../types'
 import { SendMessage } from './types'
 
 export const sendConsoleMessage: SendMessage = (
