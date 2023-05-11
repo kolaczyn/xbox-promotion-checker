@@ -2,16 +2,21 @@ import parse, { HTMLElement } from 'node-html-parser'
 import { GameInfo } from '../../types'
 import { priceToNumber } from '../../utils/priceToNumber'
 
+const extractNumberFromPrice = (str: string) =>
+  str.replace(/&nbsp;|zł|\s|\+/g, '')
+
 const scrapeCard = (card: HTMLElement): GameInfo | null => {
   const title = card.getAttribute('data-bi-cn')
-  const [prevEl, currEl] = card
-    .querySelector('[aria-hidden="true"]')
-    ?.querySelectorAll('span') ?? [null, null]
+
+  const prevEl = card.querySelector('.text-line-through.text-muted')
+  const currEl = card.querySelector('.font-weight-semibold')
+
   const url = card.querySelector('a')?.getAttribute('href')
   const imageUrl = card.querySelector('img')?.getAttribute('src')
 
-  const prevPriceStr = prevEl?.innerText
-  const currPriceStr = currEl?.innerText.replace('+', '')
+  const prevPriceStr = extractNumberFromPrice(prevEl?.innerText ?? '')
+  const currPriceStr = extractNumberFromPrice(currEl?.innerText ?? '')
+
   const prevPrice = priceToNumber(prevPriceStr ?? '')
   const currPrice = priceToNumber(currPriceStr ?? '')
 
